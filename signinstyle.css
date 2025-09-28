@@ -1,0 +1,213 @@
+:root {
+      --skin-bg: #fbeee6;
+      --skin-accent: #f7d9c4;
+      --skin-highlight: #f9e4d4;
+      --skin-shadow: #eac9b3;
+      --text-main: #3e2723;
+      --button-bg: #f7bfa0;
+      --button-hover: #f9d4b7;
+      --white: #fff;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(-45deg, var(--skin-bg), var(--skin-highlight), var(--skin-accent), var(--skin-shadow));
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .circle {
+      position: absolute;
+      border-radius: 50%;
+      background: var(--skin-accent);
+      opacity: 0.4;
+      animation: float 12s infinite ease-in-out, rotate 20s linear infinite;
+    }
+
+    .circle:nth-child(1) {
+      width: 150px;
+      height: 150px;
+      top: 10%;
+      left: 15%;
+      animation-delay: 0s;
+    }
+
+    .circle:nth-child(2) {
+      width: 100px;
+      height: 100px;
+      bottom: 15%;
+      right: 20%;
+      animation-delay: 3s;
+      background: var(--skin-highlight);
+    }
+
+    .circle:nth-child(3) {
+      width: 200px;
+      height: 200px;
+      top: 60%;
+      left: -50px;
+      animation-delay: 5s;
+      background: var(--skin-shadow);
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) translateX(0); }
+      25% { transform: translateY(-40px) translateX(30px); }
+      50% { transform: translateY(0) translateX(60px); }
+      75% { transform: translateY(40px) translateX(30px); }
+      100% { transform: translateY(0) translateX(0); }
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .container {
+      background: var(--white);
+      border-radius: 2rem;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+      padding: 3rem 2.5rem;
+      width: 350px;
+      text-align: center;
+      animation: popIn 1.2s ease;
+      position: relative;
+      z-index: 2;
+    }
+
+    @keyframes popIn {
+      0% { opacity: 0; transform: scale(0.8) rotate(-5deg); }
+      50% { opacity: 0.7; transform: scale(1.05) rotate(2deg); }
+      100% { opacity: 1; transform: scale(1) rotate(0); }
+    }
+
+    h2 {
+      color: var(--text-main);
+      margin-bottom: 1.5rem;
+      animation: fadeSlide 1.5s ease infinite alternate;
+    }
+
+    @keyframes fadeSlide {
+      from { opacity: 0.7; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .input-group {
+      margin-bottom: 1rem;
+      text-align: left;
+      animation: slideIn 1s ease both;
+    }
+
+    .input-group:nth-child(1) { animation-delay: 0.3s; }
+    .input-group:nth-child(2) { animation-delay: 0.6s; }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    label {
+      display: block;
+      font-size: 0.9rem;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+    }
+
+    input {
+      width: 320px;
+      padding: 0.8rem;
+      border-radius: 1rem;
+      border: 1px solid var(--skin-accent);
+      background: var(--skin-highlight);
+      outline: none;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    input:focus {
+      border-color: var(--button-bg);
+      box-shadow: 0 0 12px var(--skin-shadow);
+      transform: scale(1.05) rotate(1deg);
+    }
+
+    .btn {
+      width: 100%;
+      padding: 0.9rem;
+      border: none;
+      border-radius: 1.5rem;
+      background: var(--button-bg);
+      color: var(--text-main);
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease;
+      animation: bounceIn 1s ease forwards, pulse 2.5s infinite;
+      animation-delay: 0.9s, 2s;
+    }
+
+    @keyframes bounceIn {
+      0% { opacity: 0; transform: scale(0.8) rotate(-5deg); }
+      50% { opacity: 0.7; transform: scale(1.05) rotate(2deg); }
+      100% { opacity: 1; transform: scale(1) rotate(0); }
+      
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .btn:hover {
+      background: var(--button-hover);
+      transform: translateY(-5px) scale(1.08) rotate(-1deg);
+    }
+
+    .btn:active {
+      transform: scale(0.96);
+    }
+
+    .extra {
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      animation: fadeSlide 1.5s ease infinite alternate;
+    }
+
+    .extra a {
+      color: var(--button-bg);
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    .extra a:hover {
+      color: var(--text-main);
+    }
+
+    .back-btn {
+      margin-top: 1rem;
+      display: inline-block;
+      padding: 0.7rem 1.2rem;
+      border-radius: 1.2rem;
+      background: var(--skin-accent);
+      color: var(--text-main);
+      font-weight: bold;
+      text-decoration: none;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background: var(--button-hover);
+      transform: translateY(-3px);
+    }
