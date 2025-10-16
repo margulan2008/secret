@@ -237,7 +237,7 @@ footer {
 
 .footer-social {
     display: flex;
-    gap: 18px;
+    gap: 18px;  
 }
 
 .social-icon {

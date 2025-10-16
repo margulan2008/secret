@@ -6,7 +6,7 @@
   <title>Product Cards — Animated</title>
   
   <link rel="stylesheet" href="product-card.css" />
-  <!-- product-card styles moved to product-card.css -->
+
 </head>
 <body>
    <header>
@@ -25,7 +25,7 @@
     <h1>Featured products</h1>
 
     <div class="product-grid" aria-live="polite">
-      <!-- Card 1 -->
+    
       <article class="card floaty" data-image="2.jpg">
         <div class="card-inner">
           <div class="card-img" style="background-image: url('2.jpg');" aria-hidden="true">
@@ -56,7 +56,6 @@
         </div>
       </article>
 
-      <!-- Card 2 -->
       <article class="card floaty" data-image="3.jpg">
         <div class="card-inner">
           <div class="card-img" style="background-image: url('3.jpg');">
@@ -86,7 +85,7 @@
         </div>
       </article>
 
-      <!-- Card 3 (duplicate with alternate motion) -->
+ 
       <article class="card floaty" data-image="2.jpg">
         <div class="card-inner">
           <div class="card-img" style="background-image: url('2.jpg');">
@@ -116,7 +115,6 @@
         </div>
       </article>
 
-      <!-- Card 4 -->
       <article class="card floaty" data-image="3.jpg">
         <div class="card-inner">
           <div class="card-img" style="background-image: url('3.jpg');">
@@ -147,7 +145,6 @@
         </div>
       </article>
 
-      <!-- Card 5 -->
       <article class="card floaty" data-image="2.jpg">
         <div class="card-inner">
           <div class="card-img" style="background-image: url('2.jpg');">
@@ -178,7 +175,7 @@
         </div>
       </article>
 
-      <!-- Card 6 -->
+
       <article class="card floaty" data-image="3.jpg">
         <div class="card-inner">
           <div class="card-img" style="background-image: url('3.jpg');">
@@ -212,7 +209,7 @@
   </div>
 
   <script>
-    // Mouse-tilt / parallax for each card
+ 
     document.querySelectorAll('.card').forEach(card => {
       const img = card.querySelector('.card-img');
       const inner = card.querySelector('.card-inner');
@@ -223,11 +220,10 @@
         const cy = rect.top + rect.height / 2;
         const dx = e.clientX - cx;
         const dy = e.clientY - cy;
-        const rx = (-dy / rect.height) * 12; // rotateX
-        const ry = (dx / rect.width) * 12; // rotateY
+        const rx = (-dy / rect.height) * 12; 
+        const ry = (dx / rect.width) * 12;
         card.style.transform = `perspective(1200px) translateZ(0) rotateX(${rx}deg) rotateY(${ry}deg) scale(1.02)`;
-        // parallax image movement
-        img.style.transform = `translate3d(${ry * 1.6}px, ${-rx * 1.2}px, 20px) scale(1.02)`;
+          img.style.transform = `translate3d(${ry * 1.6}px, ${-rx * 1.2}px, 20px) scale(1.02)`;
       });
 
       card.addEventListener('mouseleave', () => {
@@ -236,14 +232,13 @@
       });
     });
 
-    // Small autopilot motion: gently nudge different cards every few seconds
     const cards = Array.from(document.querySelectorAll('.card'));
     let idx = 0;
     setInterval(() => {
       cards.forEach(c => c.classList.remove('nudge'));
       const c = cards[idx % cards.length];
       c.classList.add('nudge');
-      // temporary small pop
+     
       c.style.transition = 'transform 400ms';
       c.style.transform = 'translateY(-18px) scale(1.03)';
       setTimeout(() => {
@@ -252,7 +247,7 @@
       idx++;
     }, 1800);
 
-    // Keyboard accessible quick action: press "f" to focus first card
+    
     document.addEventListener('keydown', (e) => {
       if (e.key.toLowerCase() === 'f') {
         const first = document.querySelector('.card');
@@ -260,7 +255,7 @@
       }
     });
 
-    // Improve perceived performance: lazy-ish image reveal via intersection observer
+   
     if ('IntersectionObserver' in window) {
       const io = new IntersectionObserver(entries => {
         entries.forEach(ent => {

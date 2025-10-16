@@ -13,7 +13,7 @@
 
   <div class="container">
     <h2>Sign In</h2>
-    <form>
+    <form id="signin-form">
       <div class="input-group">
         <label for="email">Email</label>
         <input type="email" id="email" placeholder="Enter your email" required />
@@ -23,12 +23,70 @@
         <input type="password" id="password" placeholder="Enter your password" required />
       </div>
       <button class="btn" type="submit">Sign In</button>
+      <div id="signin-msg" style="margin-top:10px;color:#7a5b52"></div>
+      <div id="signed-in-area" style="display:none;margin-top:12px">
+        <div>Signed in as <span id="si-user"></span></div>
+        <button id="si-signout" class="btn" style="margin-top:8px">Sign Out</button>
+      </div>
       <div class="extra">
         <p>Don't have an account? <a href="sigup.html">Sign Up</a></p>
       </div>
     </form>
     <a href="index.html" class="back-btn">⬅ Back to Main</a>
   </div>
+  <script src="auth.js"></script>
+  <script>
+    const form = document.getElementById('signin-form');
+    const msg = document.getElementById('signin-msg');
+    const signedArea = document.getElementById('signed-in-area');
+    const siUser = document.getElementById('si-user');
+    const siSignout = document.getElementById('si-signout');
+
+    function showUserUI(email){
+      if(email){
+        signedArea.style.display = 'block';
+        siUser.textContent = email;
+        msg.textContent = '';
+      } else {
+        signedArea.style.display = 'none';
+        siUser.textContent = '';
+      }
+    }
+
+    form.addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+      msg.style.color = '#7a5b52';
+      msg.textContent = 'Жүктелуде...';
+      const email = document.getElementById('email').value;
+      const pass = document.getElementById('password').value;
+      try{
+        const user = await Auth.signIn(email, pass);
+        msg.style.color = 'green';
+        msg.textContent = 'Сәтті кірдіңіз — ' + user;
+        // migrate guest cart
+        Auth.migrateGuestCartToUser(user);
+        showUserUI(user);
+        // redirect to main after short delay
+        setTimeout(() => location.href = 'index.html', 900);
+      } catch(err){
+        msg.style.color = 'crimson';
+        msg.textContent = err.message || String(err);
+      }
+    });
+
+    siSignout.addEventListener('click', ()=>{
+      Auth.signOut();
+      showUserUI(null);
+      msg.style.color = '#7a5b52';
+      msg.textContent = 'Шығып кетті';
+    });
+
+    // show current user on load
+    document.addEventListener('DOMContentLoaded', ()=>{
+      const u = Auth.getCurrentUser();
+      showUserUI(u);
+    });
+  </script>
 </body>
 
 </html>

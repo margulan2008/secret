@@ -13,14 +13,14 @@
 
   <div class="container">
     <h2>Sign up</h2>
-    <form>
+    <form id="signup-form">
       <div class="input-group">
         <label for="email">Email</label>
         <input type="email" id="email" placeholder="Enter your email" required />
       </div>
       <div class="input-group">
         <label for="username">Username</label>
-        <input type="username" id="Username" placeholder="Enter your username" required />
+        <input type="text" id="username" placeholder="Enter your username" required />
       </div>
       <div class="input-group">
         <label for="password">Password</label>
@@ -28,14 +28,46 @@
       </div>
       <div class="input-group">
         <label for="confirm">Confirm password</label>
-        <input type="password" id="password" placeholder="Confirm your password" required />
+        <input type="password" id="confirm" placeholder="Confirm your password" required />
       </div>
       <button class="btn" type="submit">Sign up</button>
+      <div id="signup-msg" style="margin-top:10px;color:#7a5b52"></div>
       <div class="extra">
         <p>Already have an account? <a href="signin.html">Sign in</a></p>
       </div>
     </form>
     <a href="index.html" class="back-btn">⬅ Back to Main</a>
   </div>
+  <script src="auth.js"></script>
+  <script>
+    const form = document.getElementById('signup-form');
+    const msg = document.getElementById('signup-msg');
+
+    form.addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+      msg.style.color = '#7a5b52'; msg.textContent = 'Жүктелуде...';
+      const email = document.getElementById('email').value.trim().toLowerCase();
+      const username = document.getElementById('username').value.trim();
+      const pass = document.getElementById('password').value;
+      const confirm = document.getElementById('confirm').value;
+      if(!email || !pass){ msg.style.color='crimson'; msg.textContent='Email және пароль міндетті'; return; }
+      if(pass !== confirm){ msg.style.color='crimson'; msg.textContent='Парольдер сәйкес емес'; return; }
+      try{
+        await Auth.createUser(email, pass);
+        
+        try{
+          const raw = localStorage.getItem('app_users_v1');
+          const users = raw ? JSON.parse(raw) : {};
+          if(users[email]){ users[email].username = username || null; localStorage.setItem('app_users_v1', JSON.stringify(users)); }
+        }catch(e){ /* ignore */ }
+       
+        await Auth.signIn(email, pass);
+       
+        Auth.migrateGuestCartToUser(email);
+        msg.style.color='green'; msg.textContent = 'Тіркелу сәтті өтті. Кіріліп, басты бетті ашу...';
+        setTimeout(()=> location.href = 'index.html', 900);
+      }catch(err){ msg.style.color='crimson'; msg.textContent = err.message || String(err); }
+    });
+  </script>
 </body>
 </html>

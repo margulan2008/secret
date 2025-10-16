@@ -1,10 +1,7 @@
-/* product-card.css — self-contained page styles
-   Includes color variables, typography, and keyframes so this page
-   no longer depends on the project's global `style.css` for colors/fonts
-*/
+
 
 :root {
-  /* color palette copied from style.css */
+  
   --skin-bg: #fbeee6;
   --skin-accent: #f7d9c4;
   --skin-highlight: #f9e4d4;
@@ -14,11 +11,11 @@
   --button-hover: #f9d4b7;
   --white: #fff;
 
-  /* page variables */
+  
   --card-w: 300px;
 }
 
-/* base typography + layout overrides for this page */
+
 * { box-sizing: border-box; }
 html, body { height: 1200px; }
 body {
@@ -66,7 +63,7 @@ h1 {
   animation: popIn 900ms;
 }
 
-/* floating/pulse on load */
+
 .card.floaty {
   animation: float 3s ease-in-out infinite alternate, popIn 800ms;
 }
