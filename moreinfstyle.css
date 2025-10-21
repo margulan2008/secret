@@ -110,6 +110,7 @@ a:hover {
     text-shadow: 0 2px 12px var(--skin-shadow);
     animation: fadeInDown 1.2s;
     background: var(--gradient);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -241,7 +242,6 @@ footer {
     color: var(--text-main);
 }
 
-/* Animations */
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -268,7 +268,6 @@ footer {
     100% { opacity: 1; transform: scale(1) rotate(0);}
 }
 
-/* Responsive Design */
 @media (max-width: 1100px) {
     .container {
         padding: 2rem 2rem;

@@ -178,7 +178,6 @@ h1 {
   box-shadow: 0 18px 46px rgba(247,191,160,0.26);
 }
 
-/* shimmer on image */
 .card-img::after {
   content: "";
   position: absolute;
@@ -197,7 +196,6 @@ h1 {
   transition: left 700ms;
 }
 
-/* micro icons floating */
 .float-icons {
   position: absolute;
   right: 12px;
@@ -229,7 +227,6 @@ h1 {
   100% { transform: translateY(0) translateZ(0) rotate(0deg); }
 }
 
-/* page keyframes (copied/needed from global styles) */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -261,7 +258,6 @@ h1 {
   100% { transform: translateY(-18px);} 
 }
 
-/* Header / nav styles copied from index page's global stylesheet */
 a {
     color: var(--text-main);
     text-decoration: none;
@@ -318,7 +314,6 @@ a:hover {
 
 
 
-/* small glowing outline on hover */
 .card:after {
   content: "";
   position: absolute;
@@ -333,7 +328,6 @@ a:hover {
   box-shadow: 0 0 48px rgba(247,191,160,0.12);
 }
 
-/* responsive tweaks */
 @media (max-width: 900px) {
   .card { width: 90%; }
   .product-grid { gap: 18px; }

@@ -63,10 +63,9 @@
         const user = await Auth.signIn(email, pass);
         msg.style.color = 'green';
         msg.textContent = 'Сәтті кірдіңіз — ' + user;
-        // migrate guest cart
+        
         Auth.migrateGuestCartToUser(user);
         showUserUI(user);
-        // redirect to main after short delay
         setTimeout(() => location.href = 'index.html', 900);
       } catch(err){
         msg.style.color = 'crimson';
@@ -81,7 +80,6 @@
       msg.textContent = 'Шығып кетті';
     });
 
-    // show current user on load
     document.addEventListener('DOMContentLoaded', ()=>{
       const u = Auth.getCurrentUser();
       showUserUI(u);
